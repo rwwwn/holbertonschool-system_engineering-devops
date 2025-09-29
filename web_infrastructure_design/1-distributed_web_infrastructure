@@ -1,28 +1,6 @@
 https://imgur.com/your-diagram-1   <-- replace with your actual image URL
 
-3-box layout with load balancer:
-- HAProxy (LB) in front of 2 identical web+app servers; shared DB (Primary + Replica).
-- Each of the 2 app boxes: Nginx (reverse proxy) + app server + code.
-- DB layer: MySQL Primary (writes) + Replica (reads/standby).
-
-Why add each element:
-- Load balancer: spreads traffic, hides backends, enables rolling deploys.
-- Second app server: **horizontal scale** and redundancy.
-- DB replica: read offload and failover target.
-
-LB algorithm:
-- Example: **Round Robin** – sequentially cycles backends A,B,A,B,… to distribute requests.
-
-Active-Active vs Active-Passive (LB):
-- Active-Active: multiple backends serve traffic simultaneously (chosen here).
-- Active-Passive: one active backend; passive one only serves if active fails.
-
-MySQL Primary-Replica:
-- Primary: accepts **writes**; replicates binlog to replica.
-- Replica: applies changes; typically **reads** only.
-- From the app view: writes go to Primary; reads can be directed to Replica (if implemented).
-
-Remaining issues:
-- SPOF: the **LB** and the **DB Primary** are still single points.
-- Security: no **firewalls**, no **HTTPS**.
-- No **monitoring**: no visibility/alerts.
+• Add HAProxy LB + a 2nd web+app server; DB: MySQL Primary + Replica.
+• LB algo: Round Robin (A,B,A,B,…) for Active-Active backends.
+• Primary vs Replica: Primary handles writes, Replica reads/failover.
+Issues: LB is a SPOF, only HTTP (no HTTPS), no firewalls, no monitoring.

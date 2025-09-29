@@ -1,14 +1,5 @@
 https://imgur.com/your-diagram-3   <-- replace with your actual image URL
 
-Add:
-- **1 more server**.
-- **Second HAProxy** clustered with the first (VRRP/keepalived or cloud LB) for LB HA.
-- **Split tiers** onto dedicated hosts:
-  - Web tier (Nginx) on its own servers.
-  - App tier on separate servers (auto-scale friendly).
-  - DB tier on dedicated DB nodes (Primary + Replica).
-
-Why:
-- Second LB removes LB SPOF; virtual IP/floating IP or DNS health checks.
-- Tier separation isolates workloads (IO/CPU), enables independent scaling and deployments.
-- Cleaner security policy (FW rules per tier), simpler troubleshooting, better SLOs.
+• Add 1 more server and a 2nd HAProxy (clustered with VRRP/keepalived or cloud LB).
+• Split tiers onto dedicated servers: web-only, app-only, DB-only.
+Why: remove LB SPOF, isolate resources, scale tiers independently, simpler deployments and security.

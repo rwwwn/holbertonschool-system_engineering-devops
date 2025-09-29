@@ -1,4 +1,2 @@
 # Web infrastructure design
-
-Answer files contain **the first line as the diagram URL** (upload your whiteboard/screenshot to an image host),
-followed by concise explanations to help during manual review.
+Each answer file’s **first line** is the diagram URL. Replace the placeholder links with your uploaded whiteboard/screenshot URLs (Imgur, etc.).

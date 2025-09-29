@@ -1,29 +1,7 @@
 https://imgur.com/your-diagram-2   <-- replace with your actual image URL
 
-Same as task #1, plus:
-- **3 firewalls**:
-  1) Edge FW in front of LB (allow 80/443 from Internet; restrict mgmt).
-  2) Between LB and app tier (allow only app ports from LB subnets).
-  3) Between app tier and DB (allow 3306 only from app servers).
-- **SSL certificate** for www.foobar.com (serve **HTTPS**).
-- **3 monitoring clients** (e.g., Sumo Logic/Datadog/Prometheus node exporters) on LB + each app + DB:
-  - Collect: CPU, RAM, disk, network, Nginx metrics, DB metrics, logs.
-
-Why each addition:
-- Firewalls: least privilege between tiers; reduce attack surface.
-- HTTPS: confidentiality, integrity, and authentication of the site.
-- Monitoring: detect outages, saturation, errors, slow queries; alerting.
-
-How monitoring collects data:
-- Agents tail logs (e.g., Nginx access/error, app logs, MySQL slow log).
-- Agents/Exporters scrape OS and service metrics (e.g., /metrics endpoints).
-- Data shipped to SaaS or TSDB for dashboards and alerts.
-
-Monitor web server **QPS**:
-- From Nginx access logs: compute requests/second (e.g., log-based metrics).
-- Or expose Nginx metrics (stub_status/vts/expvar) and record `requests_total` rate.
-
-Remaining issues to explain:
-- SSL terminated at LB only: backend traffic is **plaintext** on the LAN; risk of sniffing -> consider re-encrypt to backends or secure network.
-- Single writable MySQL Primary: write bottleneck/SPOF -> consider multi-primary or failover automation and/or sharding.
-- Same components on each box: resource contention & blast-radius coupling; prefer **tier separation** (web/app/db on different nodes) for cleaner scaling and isolation.
+• Add 3 firewalls (edge, LB↔app, app↔DB), HTTPS with cert, and monitoring agents on LB/app/DB.
+• Firewalls: least-privilege between tiers.
+• HTTPS: confidentiality/integrity/authn.
+• Monitoring: metrics+logs (QPS via Nginx logs/metrics).
+Issues: TLS terminated only at LB leaves backend plaintext; single-writer DB; same components on boxes can contend.
