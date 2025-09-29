@@ -1,4 +1,4 @@
-https://imgur.com/your-diagram-1   <-- replace with your actual image URL
+
 
 • Add HAProxy LB + a 2nd web+app server; DB: MySQL Primary + Replica.
 • LB algo: Round Robin (A,B,A,B,…) for Active-Active backends.
