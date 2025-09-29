@@ -1,0 +1,23 @@
+https://imgur.com/your-diagram-0   <-- replace with your actual image URL
+
+One-server LAMP-like stack (Nginx + App + MySQL):
+- Domain: foobar.com with a DNS record `www` -> **A record** pointing to 8.8.8.8.
+- Server: single VM/host running:
+  - Web server (Nginx): serves static files and forwards dynamic requests to the app server (reverse proxy).
+  - Application server: runs your code (e.g., Gunicorn/uwsgi/Node/PM2/etc).
+  - Application files: your code base deployed on the box.
+  - Database (MySQL): stores persistent data.
+- Client ↔ Server communication: HTTP (or HTTPS) over **TCP/IP**.
+
+Key definitions:
+- Server: a computer/service providing resources to clients (here, web/app/db).
+- Role of domain name: human-friendly name mapped to IP via DNS.
+- `www` record type: **A** (hostname -> IPv4) as per requirement.
+- Web server: terminates HTTP(S), static serving, reverse proxy to the app.
+- App server: runs business logic, generates dynamic responses.
+- Database: persists data (tables, indexes, queries).
+
+Issues (single-box):
+- **SPOF**: one host down = site down.
+- **Maintenance downtime**: restarts/redeploys interrupt service.
+- **No scale**: CPU/RAM/IO limited to one machine; cannot handle traffic spikes.
