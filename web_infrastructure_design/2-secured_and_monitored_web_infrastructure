@@ -1,4 +1,4 @@
-https://imgur.com/your-diagram-2   <-- replace with your actual image URL
+
 
 • Add 3 firewalls (edge, LB↔app, app↔DB), HTTPS with cert, and monitoring agents on LB/app/DB.
 • Firewalls: least-privilege between tiers.
