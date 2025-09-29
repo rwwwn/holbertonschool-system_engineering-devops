@@ -1,4 +1,4 @@
-https://imgur.com/your-diagram-0   <-- replace with your actual image URL
+
 
 • Stack: 1 server @ 8.8.8.8 running Nginx (web), app server, your code, MySQL.
 • DNS: foobar.com with A record “www” -> 8.8.8.8.
