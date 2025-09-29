@@ -1,4 +1,4 @@
-https://imgur.com/your-diagram-3   <-- replace with your actual image URL
+
 
 • Add 1 more server and a 2nd HAProxy (clustered with VRRP/keepalived or cloud LB).
 • Split tiers onto dedicated servers: web-only, app-only, DB-only.
